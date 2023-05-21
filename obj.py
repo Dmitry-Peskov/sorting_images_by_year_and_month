@@ -68,6 +68,7 @@ class WorkFolder:
 
 class StructureCreator:
     def __init__(self, directory: str, images: list[str]):
+        """Строитель иерархии для сортировки изображений."""
         self.__dir = directory
         self.__imgs = images
         self.__output = self.__create_output_folder()
@@ -84,6 +85,7 @@ class StructureCreator:
         return path
 
     def create(self):
+        """Создать папки 'год' 'месяц' для копирования изображений"""
         for image in self.__imgs:
             dt = datetime.fromtimestamp(os.path.getmtime(image))
             if dt is None:
@@ -108,13 +110,14 @@ class Sorter:
 
     @staticmethod
     def copy(routes: dict[str, str]):
+        """Сортировать файл в папку по году и месяцу"""
         for image, output in routes.items():
             file_name = image.split('\\')[-1]
-            new_file = f'{output}\\{file_name}'
-            shutil.copy2(src=image, dst=new_file, follow_symlinks=True)
-            print(f'Файл {file_name} скопирован в "{output}"')
+            shutil.move(src=image, dst=output, copy_function=shutil.copy2)
+            print(f'Файл {file_name} перемещён в "{output}"')
 
     @staticmethod
     def open_folder(path: str):
+        """Открыть в проводнике каталог, с которым ведется работа"""
         path = os.path.realpath(path)
         os.startfile(path)

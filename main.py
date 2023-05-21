@@ -19,6 +19,9 @@ if __name__ == "__main__":
             print(error)
             continue
 
-        routes = structure.routes # список маршрутов для копирования файлов
-        Sorter.copy(routes=routes) # копируем файлы по заданным маршрутам
-        Sorter.open_folder(directory) # открываем выходной каталог в проводник Windows
+        routes = structure.routes  # список маршрутов для копирования файлов
+        Sorter.copy(routes=routes)  # копируем файлы по заданным маршрутам
+        Sorter.open_folder(directory)  # открываем выходной каталог в проводник Windows
+
+        input('Сортировка завершена!\nДля завершения работы нажмите Enter')
+        break
